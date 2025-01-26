@@ -34,3 +34,13 @@ export type NumberGuessBlameResult = {
   text: string;
   created_at?: string;
 };
+
+export type AIAnalysisBlameResult = {
+  user1: string;
+  user2: string;
+  story1: string;
+  story2: string;
+  loser: string;
+  text: string;
+  created_at?: string;
+};

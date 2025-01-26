@@ -21,6 +21,11 @@ export default {
         title: "Sayıların Hükmü 🎲",
         description: "Kader sayısı kimin daha suçlu olduğuna karar versin ⚖️",
       },
+      aiAnalysis: {
+        title: "Yapay Zeka Yargıcı 🤖",
+        description:
+          "Yapay zeka hikayelerinizi analiz edip suçluyu belirlesin ve dalga geçsin 🔍",
+      },
     },
     blameStats: {
       count: "{{count}} kez başarıyla suçlanıldı 😈",
@@ -87,6 +92,19 @@ export default {
       goHome: "YENİ SUÇLAMA SEÇ",
       middleNumberError: "Hile yapmaya çalışma! 50 sayısı yasak! 😠",
       sameNumberError: "İki kişi aynı sayıyı seçemez! 🚫",
+    },
+  },
+  aiAnalysis: {
+    title: "Yapay Zeka Sizi Yargılayacak",
+    description: "Hikayeni anlat, yapay zeka kimin suçlu olduğuna karar versin",
+    form: {
+      firstPerson: "Birinci Kişinin Adı",
+      firstStory: "Olayı kendi açından anlat...",
+      secondPerson: "İkinci Kişinin Adı",
+      secondStory: "Olayı kendi açından anlat...",
+      analyzeButton: "ANALİZ ET & DALGA GEÇ!",
+      analyzing: "Yapay zeka yargılıyor...",
+      goHome: "YENİ SUÇLAMA SEÇ",
     },
   },
   common: {

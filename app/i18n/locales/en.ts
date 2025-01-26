@@ -21,6 +21,11 @@ export default {
         title: "Number's Verdict 🎲",
         description: "Let fate's number decide who's more guilty ⚖️",
       },
+      aiAnalysis: {
+        title: "AI Judge 🤖",
+        description:
+          "Let AI analyze your stories and decide who's to blame with a roast 🔍",
+      },
     },
     blameStats: {
       count: "Successfully blamed {{count}} times 😈",
@@ -89,6 +94,19 @@ export default {
         "Way to go {{name}}, you broke it! 💥",
         "{{name}}, this is why we have trust issues! 🔒",
       ],
+    },
+  },
+  aiAnalysis: {
+    title: "AI Will Judge You",
+    description: "Tell your side of the story, let AI decide who's at fault",
+    form: {
+      firstPerson: "First Person's Name",
+      firstStory: "Tell your side of the story...",
+      secondPerson: "Second Person's Name",
+      secondStory: "Tell your side of the story...",
+      analyzeButton: "ANALYZE & ROAST!",
+      analyzing: "AI is judging...",
+      goHome: "SELECT NEW BLAME",
     },
   },
   common: {

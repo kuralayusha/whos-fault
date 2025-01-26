@@ -6,6 +6,7 @@ import { LanguageSelector } from "@/app/components/LanguageSelector";
 import {
   getFiftyFiftyBlameCount,
   getNumberGuessBlameCount,
+  getAIAnalysisBlameCount,
 } from "@/app/lib/actions";
 import { useEffect, useState } from "react";
 
@@ -51,15 +52,18 @@ export default function Start() {
   const { t } = useLanguage();
   const [fiftyFiftyCount, setFiftyFiftyCount] = useState<number>();
   const [numberGuessCount, setNumberGuessCount] = useState<number>();
+  const [aiAnalysisCount, setAIAnalysisCount] = useState<number>();
 
   useEffect(() => {
     const getCounts = async () => {
-      const [fiftyCount, numberCount] = await Promise.all([
+      const [fiftyCount, numberCount, aiCount] = await Promise.all([
         getFiftyFiftyBlameCount(),
         getNumberGuessBlameCount(),
+        getAIAnalysisBlameCount(),
       ]);
       setFiftyFiftyCount(fiftyCount);
       setNumberGuessCount(numberCount);
+      setAIAnalysisCount(aiCount);
     };
 
     getCounts();
@@ -114,21 +118,13 @@ export default function Start() {
             blameCount={numberGuessCount}
             t={t}
           />
-          {/* <OptionButton
-            href="/blame/percentage"
-            title={t("start.options.percentage.title") as string}
-            description={t("start.options.percentage.description") as string}
-          />
           <OptionButton
-            href="/blame/random"
-            title={t("start.options.random.title") as string}
-            description={t("start.options.random.description") as string}
+            href="/blame/ai-analysis"
+            title={t("start.options.aiAnalysis.title") as string}
+            description={t("start.options.aiAnalysis.description") as string}
+            blameCount={aiAnalysisCount}
+            t={t}
           />
-          <OptionButton
-            href="/blame/ai"
-            title={t("start.options.ai.title") as string}
-            description={t("start.options.ai.description") as string}
-          /> */}
         </div>
       </div>
     </main>
