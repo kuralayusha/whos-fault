@@ -100,7 +100,7 @@ export default function AIAnalysis() {
             onChange={(e) => setStory1(e.target.value)}
             placeholder={t("aiAnalysis.form.firstStory") as string}
             disabled={isAnalyzing || hasAnalyzed}
-            maxLength={500}
+            maxLength={1000}
             rows={4}
             className="w-full p-2.5 sm:p-3 bg-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed resize-none"
           />
@@ -119,7 +119,7 @@ export default function AIAnalysis() {
             onChange={(e) => setStory2(e.target.value)}
             placeholder={t("aiAnalysis.form.secondStory") as string}
             disabled={isAnalyzing || hasAnalyzed}
-            maxLength={500}
+            maxLength={1000}
             rows={4}
             className="w-full p-2.5 sm:p-3 bg-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed resize-none"
           />
