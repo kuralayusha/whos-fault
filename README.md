@@ -88,3 +88,20 @@ MIT License - See [LICENSE](LICENSE) file for details.
 ---
 
 ⚠️ **Note**: This application is for entertainment purposes only. We recommend seeking professional help for resolving real disputes.
+
+## Supported Languages 🌐
+
+The application supports the following languages:
+
+- English (en)
+- Turkish (tr)
+- German (de)
+- French (fr)
+- Spanish (es)
+- Chinese (Simplified) (zh)
+- Korean (ko)
+- Japanese (ja)
+- Arabic (ar) - with RTL support
+- Russian (ru)
+
+The AI judge provides analysis in the selected language, maintaining cultural context and appropriate tone for each language. (Converted with AI)

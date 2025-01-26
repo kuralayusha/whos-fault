@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whos-fault.vercel.app/sitemap.xml 

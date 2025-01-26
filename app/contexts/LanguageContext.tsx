@@ -1,16 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import en from "../i18n/locales/en";
-import tr from "../i18n/locales/tr";
-
-type Translations = typeof en;
-
-const translations = { en, tr };
+import { translations } from "../i18n";
+import type { Language } from "../i18n";
 
 type LanguageContextType = {
-  language: string;
-  setLanguage: (lang: string) => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
   t: (key: string) => string | string[];
 };
 
@@ -18,7 +14,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-// HTML entities'leri gerçek karakterlere dönüştüren yardımcı fonksiyon
 const decodeHtmlEntities = (str: string | unknown): string => {
   if (typeof str !== "string") return "";
 
@@ -37,19 +32,17 @@ const decodeHtmlEntities = (str: string | unknown): string => {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Language>("en");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const savedLang = localStorage.getItem("language") || "en";
-    setLanguage(savedLang);
+    setLanguage(savedLang as Language);
     setMounted(true);
   }, []);
 
   const t = (key: string) => {
-    if (!mounted) {
-      return "";
-    }
+    if (!mounted) return "";
 
     const keys = key.split(".");
     let value: any = translations[language as keyof typeof translations];
@@ -58,17 +51,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       value = value?.[k];
     }
 
-    // Eğer değer array ise direkt döndür
     if (Array.isArray(value)) {
       return value;
     }
 
-    // String ise decode et
     return decodeHtmlEntities(value || key);
   };
 
-  const handleSetLanguage = (newLang: string) => {
+  const handleSetLanguage = (newLang: Language) => {
     setLanguage(newLang);
+    localStorage.setItem("language", newLang);
   };
 
   return (
