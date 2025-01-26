@@ -113,4 +113,27 @@ export default {
     backToMethods: "Back to Methods",
     home: "Home",
   },
+  howItWorks: {
+    title: "How Does It Work? 🤔",
+    subtitle: "A fun way to resolve conflicts and share some laughs",
+    disclaimer: {
+      title: "Just For Fun! 🎭",
+      description:
+        "This app is purely for entertainment purposes. All judgments, roasts, and blame assignments are meant to be taken with a grain of salt. We use humor and randomness to lighten up tense situations and maybe even help people laugh at their disagreements.",
+    },
+    methods: {
+      title: "Our Blame Methods 🎯",
+      fiftyFifty:
+        "The classic 50/50 method uses a spinning wheel to randomly select who's to blame. It's perfect for those situations where you just need a quick, unbiased decision - even if it's completely random! The wheel never lies (or does it?).",
+      numberGuess:
+        "Players pick numbers between 0-100 (except 50, that's forbidden!). Our system generates a random 'fate number', and the person whose number is closer gets off the hook. The other person? Well, they're the one to blame!",
+      aiAnalysis:
+        "Our most sophisticated (and brutal) method! Our AI judge analyzes both sides of the story and delivers a ruthless psychological analysis. Warning: The AI judge has no mercy and might make you question your life choices!",
+    },
+    purpose: {
+      title: "The Real Purpose 🎪",
+      description:
+        "While we present this as a blame game, our real goal is to help people laugh at their conflicts and maybe see them from a different perspective. Sometimes, adding a bit of humor to a tense situation can help everyone relax and find a real solution together.",
+    },
+  },
 } as const;

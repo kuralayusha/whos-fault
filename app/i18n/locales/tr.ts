@@ -111,4 +111,28 @@ export default {
     backToMethods: "Yöntemlere Dön",
     home: "Ana Sayfa",
   },
+  howItWorks: {
+    title: "Nasıl Çalışır? 🤔",
+    subtitle:
+      "Anlaşmazlıkları çözmenin ve birlikte gülmenin eğlenceli bir yolu",
+    disclaimer: {
+      title: "Sadece Eğlence! 🎭",
+      description:
+        "Bu uygulama tamamen eğlence amaçlıdır. Tüm yargılar, taşlamalar ve suçlamalar şaka amaçlıdır. Gergin durumları hafifletmek ve belki de insanların anlaşmazlıklarına gülmelerine yardımcı olmak için mizah ve rastgelelik kullanıyoruz.",
+    },
+    methods: {
+      title: "Suçlama Yöntemlerimiz 🎯",
+      fiftyFifty:
+        "Klasik 50/50 yöntemi, kimin suçlu olduğunu rastgele seçmek için dönen bir çark kullanır. Hızlı ve tarafsız bir karara ihtiyacınız olan durumlar için mükemmel - tamamen rastgele olsa bile! Çark asla yalan söylemez (yoksa söyler mi?).",
+      numberGuess:
+        "Oyuncular 0-100 arası bir sayı seçer (50 yasak!). Sistemimiz rastgele bir 'kader sayısı' üretir ve sayısı buna en yakın olan kişi kurtulur. Diğer kişi? Eh, suçlu o oluyor!",
+      aiAnalysis:
+        "En sofistike (ve acımasız) yöntemimiz! Yapay zeka yargıcımız hikayenin her iki tarafını analiz eder ve acımasız bir psikolojik analiz sunar. Uyarı: Yapay zeka yargıcının merhameti yoktur ve hayat tercihlerinizi sorgulamanıza neden olabilir!",
+    },
+    purpose: {
+      title: "Asıl Amaç 🎪",
+      description:
+        "Bunu bir suçlama oyunu olarak sunsak da, asıl amacımız insanların çatışmalarına gülmelerine ve belki de onları farklı bir açıdan görmelerine yardımcı olmak. Bazen gergin bir duruma biraz mizah katmak, herkesin rahatlamasına ve birlikte gerçek bir çözüm bulmasına yardımcı olabilir.",
+    },
+  },
 } as const;
