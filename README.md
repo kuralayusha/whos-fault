@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Who's Fault? 🎯
 
-## Getting Started
+A fun blame game! A web application that helps you resolve disputes with your friends in a humorous way.
 
-First, run the development server:
+## 🎮 Features
+
+- **Wheel of Fate (50/50)**: Random selection based on classic coin flip logic
+- **Number's Verdict**: Determine the guilty one through a number guessing game
+- **AI Judge**: GPT-4 powered ruthless psychological analysis
+- **Multi-language Support**: 🇺🇸 English and 🇹🇷 Turkish
+- **Responsive Design**: Works seamlessly on all devices
+- **Fun Interface**: UI with animations and emoji support
+
+## 🛠️ Technologies
+
+- [Next.js 14](https://nextjs.org/) - React Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [Supabase](https://supabase.com/) - Backend & Database
+- [OpenAI GPT-4](https://openai.com/) - AI Integration
+
+## 🚀 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/whos-fault.git
+cd whos-fault
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+or
+yarn install
+```
+
+3. Create `.env.local` file:
+
+```env
+Supabase Configuration
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+OpenAI Configuration
+OPENAI_API_KEY=your_openai_api_key
+```
+
+4. Create Supabase database tables:
+
+- Run `migrations/001_create_blame_tables.sql` in your Supabase SQL editor
+
+5. Start the development server:
 
 ```bash
 npm run dev
-# or
+or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open in your browser: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Make sure your OpenAI API key has sufficient credits
+- Ensure Supabase tables are configured correctly
+- AI judge uses GPT-4, you can downgrade to GPT-3.5 in `app/lib/actions.ts` if needed
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork it
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+MIT License - See [LICENSE](LICENSE) file for details.
 
-## Deploy on Vercel
+## 🙏 Acknowledgments
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- OpenAI team for their amazing APIs
+- Supabase team for excellent backend solutions
+- Next.js team for the awesome framework
+- And of course, all contributors!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+⚠️ **Note**: This application is for entertainment purposes only. We recommend seeking professional help for resolving real disputes.
