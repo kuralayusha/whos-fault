@@ -11,7 +11,7 @@ const translations = { en, tr };
 type LanguageContextType = {
   language: string;
   setLanguage: (lang: string) => void;
-  t: (key: string) => string;
+  t: (key: string) => string | string[];
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -19,7 +19,9 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 // HTML entities'leri gerçek karakterlere dönüştüren yardımcı fonksiyon
-const decodeHtmlEntities = (str: string): string => {
+const decodeHtmlEntities = (str: string | unknown): string => {
+  if (typeof str !== "string") return "";
+
   const entities = {
     "&apos;": "'",
     "&quot;": '"',
@@ -56,6 +58,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       value = value?.[k];
     }
 
+    // Eğer değer array ise direkt döndür
+    if (Array.isArray(value)) {
+      return value;
+    }
+
+    // String ise decode et
     return decodeHtmlEntities(value || key);
   };
 
