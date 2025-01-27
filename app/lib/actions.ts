@@ -13,6 +13,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// FIFTY FIFTY
+
 export async function saveBlameResult(
   result: Omit<FiftyFiftyBlameResult, "created_at">
 ) {
@@ -52,6 +54,8 @@ export async function getFiftyFiftyBlameCount() {
     return 0;
   }
 }
+
+// NUMBER GUESS
 
 export async function saveNumberGuessResult(
   result: Omit<NumberGuessBlameResult, "created_at">
@@ -111,6 +115,8 @@ export async function saveAIAnalysisResult(
   }
 }
 
+// AI ANALYSIS
+
 export async function getAIAnalysisBlameCount() {
   try {
     const { count, error } = await supabase
@@ -129,21 +135,6 @@ export async function getAIAnalysisBlameCount() {
   }
 }
 
-async function retry<T>(
-  fn: () => Promise<T>,
-  retries = 3,
-  delay = 1000
-): Promise<T> {
-  try {
-    return await fn();
-  } catch (error) {
-    if (retries === 0) throw error;
-    await new Promise((resolve) => setTimeout(resolve, delay));
-    return retry(fn, retries - 1, delay * 2);
-  }
-}
-
-// Dile göre prompt şablonlarını tanımlayalım
 const promptTemplates: Record<
   Language,
   {
@@ -266,7 +257,6 @@ Analyze these stories and tell us who's more at fault with your signature wit!`,
   },
 };
 
-// Mevcut analyzeStoriesAction fonksiyonunu güncelleyelim
 export async function analyzeStoriesAction(
   name1: string,
   story1: string,
@@ -326,6 +316,8 @@ IMPORTANT: You must respond ONLY with a valid JSON object in this exact format, 
     };
   }
 }
+
+// SNAP ROAST
 
 export async function getSnapRoastBlameCount() {
   try {
