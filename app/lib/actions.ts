@@ -446,10 +446,10 @@ Your response must follow these rules:
 3. The second sentence should derive an abstract meaning from the photo and wrap it in words that riddle them with shame.
 4. End your response with a few fitting emojis.
 5. Respond exclusively in ENGLISH.
-6. This is for an entertainment app, so no matter how harsh your words are, users won’t be offended.
+6. This is for an entertainment app, so no matter how harsh your words are, users won't be offended.
 7. Take the ridicule to the maximum level.
 8. Insulting words are allowed.
-9. If there isn’t a human in the photo, mock the uploader with phrases like "don’t be afraid to upload a real photo, sweetie."`,
+9. If there isn't a human in the photo, mock the uploader with phrases like "don't be afraid to upload a real photo, sweetie."`,
     userPrompt:
       "Analyze this photo and share your kind(!) thoughts about {{userName}} in English.",
   },
@@ -468,7 +468,7 @@ Deine Antwort muss folgende Regeln befolgen:
 6. Das ist für eine Unterhaltungs-App gedacht, daher werden sich die Nutzer nicht beleidigt fühlen, egal wie hart deine Worte sind.
 7. Treibe den Spott auf die maximale Stufe.
 8. Beleidigende Wörter sind erlaubt.
-9. Wenn sich keine Person auf dem Foto befindet, mache dich über den Hochladenden lustig, mit Sätzen wie „Hab keine Angst, ein echtes Foto hochzuladen, Schätzchen.“`,
+9. Wenn sich keine Person auf dem Foto befindet, mache dich über den Hochladenden lustig, mit Sätzen wie "Hab keine Angst, ein echtes Foto hochzuladen, Schätzchen."`,
     userPrompt:
       "Analysiere dieses Foto und teile deine netten(!) Gedanken über {{userName}}.",
   },
@@ -487,7 +487,7 @@ Ta réponse doit respecter les règles suivantes :
 6. Ceci est pour une application de divertissement, donc peu importe la dureté de tes mots, les utilisateurs ne seront pas offensés.
 7. Pousse le ridicule au maximum.
 8. Les mots insultants sont autorisés.
-9. S'il n'y a pas d'humain sur la photo, moque-toi de celui qui l'a téléchargée avec des phrases comme « N’aie pas peur de mettre une vraie photo, mon chou. »`,
+9. S'il n'y a pas d'humain sur la photo, moque-toi de celui qui l'a téléchargée avec des phrases comme « N'aie pas peur de mettre une vraie photo, mon chou. »`,
     userPrompt:
       "Analysez cette photo et partagez vos pensées gentilles(!) sur {{userName}}.",
   },
@@ -518,14 +518,14 @@ Tu respuesta debe seguir estas reglas:
 你的回答必须遵循以下规则：
 
 1. 只能使用两句话。
-2. 第一句必须毫不留情地嘲讽他们的外貌或姿势，你可以使用类似“哈哈哈”的效果将羞辱推向极致。
+2. 第一句必须毫不留情地嘲讽他们的外貌或姿势，你可以使用类似"哈哈哈"的效果将羞辱推向极致。
 3. 第二句应该从照片中提取一个抽象的意义，并用词让他们感到羞愧。
 4. 用几个合适的表情符号结束你的回答。
 5. 仅用 中文 回答。
 6. 这是一个娱乐应用程序，所以无论你的话有多刻薄，用户都不会感到冒犯。
 7. 将嘲讽的力度拉到最大。
 8. 允许使用侮辱性词汇。
-9. 如果照片中没有人，就用类似“别害怕，上传一张真正的照片吧，亲爱的”这样的句子嘲讽上传者。`,
+9. 如果照片中没有人，就用类似"别害怕，上传一张真正的照片吧，亲爱的"这样的句子嘲讽上传者。`,
     userPrompt: "分析这张照片，分享你对{{userName}}的善意(!)想法。",
   },
   ko: {
@@ -581,48 +581,71 @@ export async function analyzeImageAction(formData: FormData) {
     const image = formData.get("image") as File;
     const userName = formData.get("userName") as string;
 
+    console.log("Image size:", image.size, "bytes");
+    if (image.size > 4 * 1024 * 1024) {
+      // 4MB limit
+      throw new Error("Image too large");
+    }
+
     // Görsel içeriğini base64'e çevir
     const buffer = Buffer.from(await image.arrayBuffer());
     const base64Image = buffer.toString("base64");
+    console.log("Base64 image size:", base64Image.length, "chars");
 
     console.log("Using template for language:", language);
     const template = visionPromptTemplates[language];
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-2024-08-06",
-      messages: [
-        {
-          role: "system",
-          content: template.systemPrompt,
-        },
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: template.userPrompt.replace("{{userName}}", userName),
-            },
-            {
-              type: "image_url",
-              image_url: {
-                url: `data:image/jpeg;base64,${base64Image}`,
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4-vision-preview", // model adını düzelttim
+        messages: [
+          {
+            role: "system",
+            content: template.systemPrompt,
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: template.userPrompt.replace("{{userName}}", userName),
               },
-            },
-          ],
-        },
-      ],
-      max_tokens: 150,
-    });
-    console.log("response from openai: ", response);
+              {
+                type: "image_url",
+                image_url: {
+                  url: `data:image/jpeg;base64,${base64Image}`,
+                },
+              },
+            ],
+          },
+        ],
+        max_tokens: 150,
+      });
 
-    const roastText = response.choices[0].message.content;
-    if (!roastText) {
-      throw new Error("No response from OpenAI");
+      console.log("OpenAI response:", response);
+      const roastText = response.choices[0].message.content;
+      if (!roastText) {
+        throw new Error("No response from OpenAI");
+      }
+
+      return { text: roastText };
+    } catch (openaiError) {
+      console.error("OpenAI API Error:", openaiError);
+      throw openaiError;
     }
-
-    console.log("OpenAI response:", roastText);
-    return { text: roastText };
   } catch (error) {
     console.error("Error in analyzeImageAction:", error);
+
+    if (error instanceof Error) {
+      if (error.message === "Image too large") {
+        return {
+          text:
+            language === "tr"
+              ? "Fotoğraf boyutu çok büyük (max 4MB), lütfen daha küçük bir fotoğraf seçin 📸"
+              : "Image size too large (max 4MB), please select a smaller photo 📸",
+        };
+      }
+    }
 
     const errorMessage = (() => {
       switch (language) {

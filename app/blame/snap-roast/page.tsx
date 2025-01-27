@@ -20,19 +20,32 @@ export default function SnapRoast() {
   const [hasAnalyzed, setHasAnalyzed] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log("file: ", file);
+      console.log("Selected file:", file.name, file.size, file.type);
 
-      setImage(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        console.log(reader.result);
+      // Boyut kontrolü
+      if (file.size > 4 * 1024 * 1024) {
+        alert(t("snapRoast.errors.imageTooLarge") as string);
+        return;
+      }
 
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      try {
+        setImage(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result as string);
+        };
+        reader.onerror = () => {
+          console.error("FileReader error:", reader.error);
+          alert(t("snapRoast.errors.imageLoadError") as string);
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Image processing error:", error);
+        alert(t("snapRoast.errors.imageProcessError") as string);
+      }
     }
   };
 
