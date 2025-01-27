@@ -633,8 +633,8 @@ export async function analyzeImageAction(formData: FormData) {
         return {
           text:
             language === "tr"
-              ? "Fotoğraf boyutu çok büyük (max 4MB), lütfen daha küçük bir fotoğraf seçin 📸"
-              : "Image size too large (max 4MB), please select a smaller photo 📸",
+              ? "Fotoğraf boyutu çok büyük (max 5MB), lütfen daha küçük bir fotoğraf seçin 📸"
+              : "Image size too large (max 5MB), please select a smaller photo 📸",
         };
       }
     }
