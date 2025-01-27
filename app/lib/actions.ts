@@ -275,7 +275,7 @@ IMPORTANT: You must respond ONLY with a valid JSON object in this exact format, 
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-2024-11-20",
+      model: "gpt-4o-2024-08-06",
       temperature: 0.8,
       messages: [
         {
@@ -589,7 +589,7 @@ export async function analyzeImageAction(formData: FormData) {
 
     try {
       const response = await openai.chat.completions.create({
-        model: "gpt-4o-2024-11-20", // model adını düzelttim
+        model: "gpt-4o-2024-08-06",
         messages: [
           {
             role: "system",
