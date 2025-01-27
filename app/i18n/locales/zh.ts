@@ -1,12 +1,12 @@
 export default {
   home: {
-    title: "谁的错？",
-    subtitle: "为什么要自己指责别人，让我们来帮你",
-    quote: "指责他人是一门艺术，我们只是让它自动化",
-    description: "让AI来处理指责，你只管放轻松",
+    title: "Super Blamer 3000",
+    subtitle: "让AI来指责别人，您尽管放松 🤔",
+    quote: "指责他人是一门艺术，我们用爱来完成",
+    description: "何必为寻找责任人而烦恼，让AI来处理这些戏剧性时刻 ✨",
     buttons: {
       getStarted: "开始使用",
-      learnMore: "了解更多",
+      learnMore: "工作原理",
     },
   },
   start: {

@@ -1,13 +1,14 @@
 export default {
   // Korece çeviriler
   home: {
-    title: "누구의 잘못인가?",
-    subtitle: "다른 사람을 비난하는 것을 우리에게 맡기세요",
-    quote: "남을 비난하는 것은 예술입니다. 우리는 그저 자동화할 뿐이죠",
-    description: "AI가 비난을 처리하는 동안 편하게 쉬세요",
+    title: "Super Blamer 3000",
+    subtitle: "AI가 책임을 찾는 동안 편하게 쉬세요 🤔",
+    quote: "다른 사람을 비난하는 것은 예술입니다, 우리는 사랑으로 합니다",
+    description:
+      "누구의 잘못인지 스트레스 받지 마세요, AI가 드라마를 처리합니다 ✨",
     buttons: {
       getStarted: "시작하기",
-      learnMore: "더 알아보기",
+      learnMore: "작동 방식",
     },
   },
   start: {

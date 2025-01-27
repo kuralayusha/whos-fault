@@ -1,13 +1,13 @@
 export default {
   // Japonca çeviriler
   home: {
-    title: "誰が悪いの？",
-    subtitle: "人を責めるのは私たちに任せてください",
-    quote: "人を責めるのは芸術です。私たちはそれを自動化するだけです",
-    description: "AIに責任追及を任せて、リラックスしましょう",
+    title: "Super Blamer 3000",
+    subtitle: "AIに責任追及を任せて、くつろいでください 🤔",
+    quote: "他人を責めることは芸術です、私たちは愛を持って行います",
+    description: "誰が悪いのか悩む必要はありません、AIがドラマを処理します ✨",
     buttons: {
       getStarted: "始める",
-      learnMore: "詳しく見る",
+      learnMore: "仕組み",
     },
   },
   start: {

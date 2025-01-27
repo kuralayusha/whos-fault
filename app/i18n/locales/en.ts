@@ -1,12 +1,13 @@
 export default {
   home: {
-    title: "Who's Fault?",
-    subtitle: "Why blame people when we can do it for you?",
-    quote: "Blaming others is an art, we're just making it automated",
-    description: "Let AI handle the finger-pointing while you relax",
+    title: "Super Blamer 3000",
+    subtitle: "Let AI do the finger-pointing while you sit back and relax 🤔",
+    quote: "Blaming others is an art, we do it with love",
+    description:
+      "Why stress about who's at fault when AI can handle the drama ✨",
     buttons: {
-      getStarted: "Get Started",
-      learnMore: "Learn More",
+      getStarted: "Start Blaming",
+      learnMore: "How it Works",
     },
   },
   start: {

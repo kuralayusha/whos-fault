@@ -1,14 +1,15 @@
 export default {
   // Almanca çeviriler
   home: {
-    title: "Wer ist Schuld?",
-    subtitle: "Warum andere beschuldigen, wenn wir es für Sie tun können?",
-    quote: "Andere zu beschuldigen ist eine Kunst, wir automatisieren sie nur",
+    title: "Super Blamer 3000",
+    subtitle:
+      "Überlassen Sie das Beschuldigen der KI, lehnen Sie sich zurück 🤔",
+    quote: "Andere zu beschuldigen ist eine Kunst, wir machen es mit Liebe",
     description:
-      "Lassen Sie KI die Schuldzuweisung übernehmen, während Sie sich entspannen",
+      "Warum sich über Schuld streiten, wenn KI das Drama übernehmen kann ✨",
     buttons: {
       getStarted: "Loslegen",
-      learnMore: "Mehr erfahren",
+      learnMore: "Wie es funktioniert",
     },
   },
   start: {

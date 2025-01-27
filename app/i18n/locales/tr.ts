@@ -1,12 +1,12 @@
 export default {
   home: {
-    title: "Kimin Suçu?",
-    subtitle: "İnsanları suçlamak size düşmez, bırakın biz yapalım",
-    quote: "Başkalarını suçlamak bir sanattır, biz sadece otomatikleştiriyoruz",
-    description: "Parmakla gösterme işini yapay zekaya bırakın, siz rahatlayın",
+    title: "Super Blamer 3000",
+    subtitle: "İnsanları suçlamak size düşmez, bırakın o yapsın 🤔",
+    quote: "Başkalarını suçlamak bir sanattır, biz bunu aşk ile yapıyoruz",
+    description: "Yapay zeka suçluyu bulsun, siz arkanıza yaslanın ✨",
     buttons: {
-      getStarted: "Başla",
-      learnMore: "Detaylar",
+      getStarted: "Suçlamaya Başla",
+      learnMore: "Nasıl Çalışır",
     },
   },
   start: {

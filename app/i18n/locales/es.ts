@@ -1,13 +1,13 @@
 export default {
   home: {
-    title: "¿De Quién es la Culpa?",
-    subtitle: "¿Por qué culpar a otros cuando podemos hacerlo por ti?",
-    quote: "Culpar a otros es un arte, nosotros solo lo automatizamos",
+    title: "Super Blamer 3000",
+    subtitle: "Deja que la IA señale culpables mientras te relajas 🤔",
+    quote: "Culpar a otros es un arte, lo hacemos con amor",
     description:
-      "Deja que la IA se encargue de señalar culpables mientras tú te relajas",
+      "¿Por qué estresarse buscando culpables cuando la IA puede manejar el drama? ✨",
     buttons: {
       getStarted: "Comenzar",
-      learnMore: "Saber Más",
+      learnMore: "Cómo funciona",
     },
   },
   start: {

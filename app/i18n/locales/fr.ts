@@ -1,16 +1,14 @@
 export default {
   // Fransızca çeviriler
   home: {
-    title: "À Qui la Faute ?",
-    subtitle:
-      "Pourquoi blâmer les autres quand nous pouvons le faire pour vous ?",
-    quote:
-      "Blâmer les autres est un art, nous le rendons simplement automatique",
+    title: "Super Blamer 3000",
+    subtitle: "Laissez l'IA pointer du doigt pendant que vous vous détendez 🤔",
+    quote: "Blâmer les autres est un art, nous le faisons avec amour",
     description:
-      "Laissez l'IA gérer les accusations pendant que vous vous détendez",
+      "Pourquoi stresser pour trouver le coupable quand l'IA peut gérer le drame ✨",
     buttons: {
       getStarted: "Commencer",
-      learnMore: "En Savoir Plus",
+      learnMore: "Comment ça marche",
     },
   },
   start: {
