@@ -7,6 +7,7 @@ import {
   getFiftyFiftyBlameCount,
   getNumberGuessBlameCount,
   getAIAnalysisBlameCount,
+  getSnapRoastBlameCount,
 } from "@/app/lib/actions";
 import { useEffect, useState } from "react";
 
@@ -53,17 +54,20 @@ export default function Start() {
   const [fiftyFiftyCount, setFiftyFiftyCount] = useState<number>();
   const [numberGuessCount, setNumberGuessCount] = useState<number>();
   const [aiAnalysisCount, setAIAnalysisCount] = useState<number>();
+  const [snapRoastCount, setSnapRoastCount] = useState<number>();
 
   useEffect(() => {
     const getCounts = async () => {
-      const [fiftyCount, numberCount, aiCount] = await Promise.all([
+      const [fiftyCount, numberCount, aiCount, snapRCount] = await Promise.all([
         getFiftyFiftyBlameCount(),
         getNumberGuessBlameCount(),
         getAIAnalysisBlameCount(),
+        getSnapRoastBlameCount(),
       ]);
       setFiftyFiftyCount(fiftyCount);
       setNumberGuessCount(numberCount);
       setAIAnalysisCount(aiCount);
+      setSnapRoastCount(snapRCount);
     };
 
     getCounts();
@@ -123,6 +127,13 @@ export default function Start() {
             title={t("start.options.aiAnalysis.title") as string}
             description={t("start.options.aiAnalysis.description") as string}
             blameCount={aiAnalysisCount}
+            t={t}
+          />
+          <OptionButton
+            href="/blame/snap-roast"
+            title={t("start.options.snapRoast.title") as string}
+            description={t("start.options.snapRoast.description") as string}
+            blameCount={snapRoastCount}
             t={t}
           />
         </div>

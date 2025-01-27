@@ -44,3 +44,11 @@ export type AIAnalysisBlameResult = {
   text: string;
   created_at?: string;
 };
+
+export type SnapRoastBlameResult = {
+  id: number;
+  user_name: string;
+  image_url: string;
+  roast_text: string;
+  created_at: string;
+};

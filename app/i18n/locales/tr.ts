@@ -26,6 +26,11 @@ export default {
         description:
           "Yapay zeka hikayelerinizi analiz edip suçluyu belirlesin ve dalga geçsin 🔍",
       },
+      snapRoast: {
+        title: "SnapRoast 📸",
+        description:
+          "Yapay zeka fotoğrafınıza bakıp sizi (nazikçe) eleştirsin 🔍 (Tavsiye edilmez)",
+      },
     },
     blameStats: {
       count: "{{count}} kez başarıyla suçlanıldı 😈",
@@ -105,6 +110,20 @@ export default {
       analyzeButton: "ANALİZ ET & DALGA GEÇ!",
       analyzing: "Yapay zeka yargılıyor...",
       goHome: "YENİ SUÇLAMA SEÇ",
+    },
+  },
+  snapRoast: {
+    title: "SnapRoast",
+    description:
+      "Fotoğrafınızı yükleyin, AI size özel bir roast hazırlasın (Dikkat: Kalp kırıcı olabilir!)",
+    form: {
+      userName: "İsminiz",
+      imageUpload: "Fotoğraf Yükle veya Çek",
+      analyzeButton: "Roast'u Başlat!",
+      analyzing: "AI inceliyor...",
+      goHome: "YENİ ROAST",
+      imageError: "Lütfen bir fotoğraf seçin",
+      userNameError: "İsminizi girmelisiniz",
     },
   },
   common: {

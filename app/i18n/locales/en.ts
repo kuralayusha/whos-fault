@@ -27,6 +27,11 @@ export default {
         description:
           "Let AI analyze your stories and decide who's to blame with a roast 🔍",
       },
+      snapRoast: {
+        title: "Snap-Roast Master 📸",
+        description:
+          "Let AI judge your photo and (gently) roast you 🔍 (Not recommended)",
+      },
     },
     blameStats: {
       count: "Successfully blamed {{count}} times 😈",
@@ -108,6 +113,20 @@ export default {
       analyzeButton: "ANALYZE & ROAST!",
       analyzing: "AI is judging...",
       goHome: "SELECT NEW BLAME",
+    },
+  },
+  selfieRoast: {
+    title: "Snap-Roast Master",
+    description:
+      "Upload your photo and let AI prepare a special roast (Warning: May be heartbreaking!)",
+    form: {
+      userName: "Your Name",
+      imageUpload: "Upload or Take Photo",
+      analyzeButton: "Start Roasting!",
+      analyzing: "AI is judging...",
+      goHome: "NEW ROAST",
+      imageError: "Please select a photo",
+      userNameError: "Name is required",
     },
   },
   common: {

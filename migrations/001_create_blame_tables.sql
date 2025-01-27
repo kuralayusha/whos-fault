@@ -33,10 +33,21 @@ CREATE TABLE IF NOT EXISTS ai_analysis_blame_results (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::TEXT, NOW()) NOT NULL
 );
 
+CREATE TABLE snap_roast_blame_results (
+    id SERIAL PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    image_url TEXT NOT NULL,
+    roast_text TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+
 -- Indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_fifty_fifty_created_at ON fifty_fifty_blame_results(created_at);
 CREATE INDEX IF NOT EXISTS idx_number_guess_created_at ON number_guess_blame_results(created_at);
 CREATE INDEX IF NOT EXISTS idx_ai_analysis_created_at ON ai_analysis_blame_results(created_at);
+CREATE INDEX IF NOT EXISTS snap_roast_created_at_idx ON snap_roast_blame_results(created_at); 
+
 
 -- Comments for documentation
 COMMENT ON TABLE fifty_fifty_blame_results IS 'Stores results from the fifty-fifty blame game';
