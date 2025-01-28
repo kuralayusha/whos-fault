@@ -44,10 +44,10 @@ export default function SnapRoast() {
 
     try {
       // Dosya boyutu kontrolü
-      if (image.size > 4 * 1024 * 1024) {
-        // 4MB
-        throw new Error("Fotoğraf boyutu çok büyük (max 4MB)");
-      }
+      //   if (image.size > 4 * 1024 * 1024) {
+      //     // 4MB
+      //     throw new Error("Fotoğraf boyutu çok büyük (max 4MB)");
+      //   }
 
       const uploadFormData = new FormData();
       uploadFormData.append("file", image);

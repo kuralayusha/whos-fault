@@ -627,7 +627,7 @@ export async function analyzeImageAction(formData: FormData) {
     const language = (formData.get("language") as Language) || "en";
 
     // Dosya formatı kontrolü
-    const validFormats = ["image/jpeg", "image/png", "image/webp"];
+    const validFormats = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
     if (!validFormats.includes(image.type)) {
       throw new Error("INVALID_FORMAT");
     }
