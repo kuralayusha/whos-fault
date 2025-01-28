@@ -169,8 +169,11 @@ Analyze these stories and tell us who's more at fault with your signature wit!`,
 4. Yargın hikayelere atıfta bulunmamalı; yalnızca suçlu bireyi küçümsemeye ve kınamaya odaklanmalıdır.
 5. Mizahına kafiye veya kelime oyunlarıyla bir dokunuş ekle; yanıtın okunması keyifli olmalı ancak asla anlam kaybı olmasın ve sert tonunu yumuşatma.
 6. İkinci cümleni, mizahı tamamlamak için alaycı bir emoji kombinasyonu ile bitir.`,
-    userPrompt:
-      "Bu fotoğrafı analiz et ve {{userName}} hakkında nazik(!) yorumunu Türkçe olarak paylaş.",
+    userPrompt: `Hikaye 1 ({name1}'den):
+{story1}
+
+Hikaye 2 ({name2}'den):
+{story2}`,
   },
 };
 
