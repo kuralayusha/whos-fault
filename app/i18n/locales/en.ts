@@ -46,6 +46,7 @@ export default {
       blameButton: "BLAME!",
       spinning: "Deciding...",
       goHome: "SELECT NEW BLAME",
+      playAgain: "Spin Again!",
     },
     results: {
       accusations: [
@@ -81,6 +82,7 @@ export default {
       goHome: "SELECT NEW BLAME",
       middleNumberError: "No cheating! 50 is forbidden! 😠",
       sameNumberError: "Both players can't pick the same number! 🚫",
+      playAgain: "Try Again!",
     },
     results: {
       accusations: [
@@ -113,6 +115,7 @@ export default {
       analyzeButton: "ANALYZE & ROAST!",
       analyzing: "AI is judging...",
       goHome: "SELECT NEW BLAME",
+      playAgain: "Judge Again!",
     },
   },
   selfieRoast: {

@@ -45,6 +45,7 @@ export default {
       blameButton: "SUÇLA!",
       spinning: "Karar veriliyor...",
       goHome: "YENİ SUÇLAMA SEÇ",
+      playAgain: "Tekrar Çevir!",
     },
     results: {
       accusations: [
@@ -97,6 +98,7 @@ export default {
       goHome: "YENİ SUÇLAMA SEÇ",
       middleNumberError: "Hile yapmaya çalışma! 50 sayısı yasak! 😠",
       sameNumberError: "İki kişi aynı sayıyı seçemez! 🚫",
+      playAgain: "Tekrar Dene!",
     },
   },
   aiAnalysis: {
@@ -110,6 +112,7 @@ export default {
       analyzeButton: "ANALİZ ET & DALGA GEÇ!",
       analyzing: "Yapay zeka yargılıyor...",
       goHome: "YENİ SUÇLAMA SEÇ",
+      playAgain: "Tekrar Yargıla!",
     },
   },
   snapRoast: {

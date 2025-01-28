@@ -64,6 +64,17 @@ export default function FiftyFifty() {
     setter(sanitizedValue);
   };
 
+  const resetGame = () => {
+    setPerson1("");
+    setPerson2("");
+    setIsSpinning(false);
+    setResult(null);
+    setHasSpun(false);
+    if (wheelRef.current) {
+      wheelRef.current.style.transform = "rotate(0deg)";
+    }
+  };
+
   return (
     <main className="h-[100dvh] w-full bg-gradient-to-b from-slate-900 to-slate-800 flex flex-col items-center justify-center p-4 overflow-hidden">
       {/* Üst butonlar için container */}
@@ -170,12 +181,12 @@ export default function FiftyFifty() {
             </div>
 
             {hasSpun ? (
-              <Link
-                href="/start"
+              <button
+                onClick={resetGame}
                 className="block w-full p-3 sm:p-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-center transition-colors text-sm sm:text-base"
               >
-                {t("fiftyFifty.form.goHome") as string}
-              </Link>
+                {t("fiftyFifty.form.playAgain") as string}
+              </button>
             ) : (
               <button
                 onClick={spinWheel}

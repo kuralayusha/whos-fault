@@ -139,6 +139,17 @@ export default function NumberGuess() {
     }, 2000);
   };
 
+  const resetGame = () => {
+    setPerson1("");
+    setPerson2("");
+    setNumber1("");
+    setNumber2("");
+    setTargetNumber(null);
+    setIsSpinning(false);
+    setResult(null);
+    setHasSpun(false);
+  };
+
   const isValid =
     person1 &&
     person2 &&
@@ -236,12 +247,12 @@ export default function NumberGuess() {
         )}
 
         {hasSpun ? (
-          <Link
-            href="/start"
+          <button
+            onClick={resetGame}
             className="block w-full p-3 sm:p-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-center transition-colors text-sm sm:text-base"
           >
-            {t("numberGuess.form.goHome") as string}
-          </Link>
+            {t("numberGuess.form.playAgain") as string}
+          </button>
         ) : (
           <button
             onClick={revealFate}

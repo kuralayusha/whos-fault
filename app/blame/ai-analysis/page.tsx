@@ -55,6 +55,16 @@ export default function AIAnalysis() {
     }
   };
 
+  const resetGame = () => {
+    setPerson1("");
+    setPerson2("");
+    setStory1("");
+    setStory2("");
+    setIsAnalyzing(false);
+    setResult(null);
+    setHasAnalyzed(false);
+  };
+
   const isValid =
     person1 &&
     person2 &&
@@ -126,12 +136,12 @@ export default function AIAnalysis() {
         </div>
 
         {hasAnalyzed ? (
-          <Link
-            href="/start"
+          <button
+            onClick={resetGame}
             className="block w-full p-3 sm:p-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-center transition-colors text-sm sm:text-base"
           >
-            {t("aiAnalysis.form.goHome") as string}
-          </Link>
+            {t("aiAnalysis.form.playAgain") as string}
+          </button>
         ) : (
           <button
             onClick={analyze}
