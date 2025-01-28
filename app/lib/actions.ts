@@ -632,20 +632,50 @@ export async function analyzeImageAction(formData: FormData) {
       throw new Error("INVALID_FORMAT");
     }
 
-    // Base64 dönüşümü öncesi kontrol
     try {
-      const buffer = Buffer.from(await image.arrayBuffer());
-      const base64Image = buffer.toString("base64");
+      // Görüntüyü sıkıştırma
+      const compressImage = async (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = URL.createObjectURL(file);
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d")!;
 
-      // Base64 boyut kontrolü - 2MB limit
-      if (base64Image.length > 2 * 1024 * 1024) {
-        throw new Error("IMAGE_TOO_LARGE");
-      }
+            // Maksimum boyutları hesapla (oranı koru)
+            const maxWidth = 800;
+            const maxHeight = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxWidth) {
+                height *= maxWidth / width;
+                width = maxWidth;
+              }
+            } else {
+              if (height > maxHeight) {
+                width *= maxHeight / height;
+                height = maxHeight;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL("image/jpeg", 0.7));
+          };
+          img.onerror = reject;
+        });
+      };
+
+      // Sıkıştırılmış base64 görüntüyü al
+      const compressedBase64 = await compressImage(image);
 
       const template = visionPromptTemplates[language];
       const response = await openai.chat.completions.create({
         model: "gpt-4o-2024-08-06",
-        // model: "gpt-4o-2024-11-20",
         messages: [
           {
             role: "system",
@@ -661,7 +691,7 @@ export async function analyzeImageAction(formData: FormData) {
               {
                 type: "image_url",
                 image_url: {
-                  url: `data:image/jpeg;base64,${base64Image}`,
+                  url: compressedBase64,
                 },
               },
             ],
