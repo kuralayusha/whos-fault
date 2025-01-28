@@ -43,6 +43,13 @@ export default function SnapRoast() {
     setResult(null);
 
     try {
+      console.log("------- Image Processing Start -------");
+      console.log("Original file:", {
+        name: image.name,
+        type: image.type,
+        size: `${(image.size / 1024 / 1024).toFixed(2)}MB`,
+      });
+
       const compressImage = async (file: File): Promise<File> => {
         return new Promise((resolve, reject) => {
           const img = new Image();
@@ -88,13 +95,16 @@ export default function SnapRoast() {
         });
       };
 
-      console.log("Original image size:", image.size / 1024 / 1024, "MB");
       const compressedImage = await compressImage(image);
-      console.log(
-        "Compressed image size:",
-        compressedImage.size / 1024 / 1024,
-        "MB"
-      );
+      console.log("Compressed file:", {
+        name: compressedImage.name,
+        type: compressedImage.type,
+        size: `${(compressedImage.size / 1024 / 1024).toFixed(2)}MB`,
+        reduction: `${((1 - compressedImage.size / image.size) * 100).toFixed(
+          1
+        )}%`,
+      });
+      console.log("------- Image Processing End -------");
 
       if (compressedImage.size > 1 * 1024 * 1024) {
         throw new Error("IMAGE_TOO_LARGE");
@@ -102,7 +112,7 @@ export default function SnapRoast() {
 
       // Orijinal görüntüyü Supabase'e yükle
       const uploadFormData = new FormData();
-      uploadFormData.append("file", image);
+      uploadFormData.append("file", compressedImage);
       uploadFormData.append("userName", userName);
       const imageUrl = await uploadImageAction(uploadFormData);
 
