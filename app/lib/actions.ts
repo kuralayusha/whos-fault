@@ -637,8 +637,8 @@ export async function analyzeImageAction(formData: FormData) {
       const buffer = Buffer.from(await image.arrayBuffer());
       const base64Image = buffer.toString("base64");
 
-      // Base64 boyut kontrolü
-      if (base64Image.length > 20 * 1024 * 1024) {
+      // Base64 boyut kontrolü - 2MB limit
+      if (base64Image.length > 2 * 1024 * 1024) {
         throw new Error("IMAGE_TOO_LARGE");
       }
 
