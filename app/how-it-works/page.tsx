@@ -83,6 +83,15 @@ export default function HowItWorks() {
                   {t("howItWorks.methods.aiAnalysis")}
                 </p>
               </div>
+
+              <div className="bg-slate-800/50 p-6 rounded-xl space-y-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-blue-400">
+                  {t("start.options.snapRoast.title")}
+                </h3>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  {t("howItWorks.methods.snapRoast")}
+                </p>
+              </div>
             </div>
           </div>
 

@@ -28,9 +28,8 @@ export default {
           "Let AI analyze your stories and decide who's to blame with a roast 🔍",
       },
       snapRoast: {
-        title: "Snap-Roast Master 📸",
-        description:
-          "Let AI judge your photo and (gently) roast you 🔍 (Not recommended)",
+        title: "Snap-Roast Master 📸 (Not recommended)",
+        description: "Let AI judge your photo and (gently) roast you 😵‍💫",
       },
     },
     blameStats: {
@@ -152,6 +151,8 @@ export default {
         "Players pick numbers between 0-100 (except 50, that's forbidden!). Our system generates a random 'fate number', and the person whose number is closer gets off the hook. The other person? Well, they're the one to blame!",
       aiAnalysis:
         "Our most sophisticated (and brutal) method! Our AI judge analyzes both sides of the story and delivers a ruthless psychological analysis. Warning: The AI judge has no mercy and might make you question your life choices!",
+      snapRoast:
+        "Our most ruthless method! Our AI judge analyzes your photo and roasts you without mercy. Warning: May be heartbreaking, not ego-friendly, and might make you question your life choices! (Not recommended)",
     },
     purpose: {
       title: "The Real Purpose 🎪",

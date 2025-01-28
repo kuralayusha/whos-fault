@@ -27,9 +27,9 @@ export default {
           "Yapay zeka hikayelerinizi analiz edip suçluyu belirlesin ve dalga geçsin 🔍",
       },
       snapRoast: {
-        title: "SnapRoast 📸",
+        title: "SnapRoast 📸 (Tavsiye edilmez)",
         description:
-          "Yapay zeka fotoğrafınıza bakıp sizi (nazikçe) eleştirsin 🔍 (Tavsiye edilmez)",
+          "Yapay zeka fotoğrafınıza bakıp sizi (!nazikçe) eleştirsin 😵‍💫",
       },
     },
     blameStats: {
@@ -151,6 +151,8 @@ export default {
         "Oyuncular 0-100 arası bir sayı seçer (50 yasak!). Sistemimiz rastgele bir 'kader sayısı' üretir ve sayısı buna en yakın olan kişi kurtulur. Diğer kişi? Eh, suçlu o oluyor!",
       aiAnalysis:
         "En sofistike (ve acımasız) yöntemimiz! Yapay zeka yargıcımız hikayenin her iki tarafını analiz eder ve acımasız bir psikolojik analiz sunar. Uyarı: Yapay zeka yargıcının merhameti yoktur ve hayat tercihlerinizi sorgulamanıza neden olabilir!",
+      snapRoast:
+        "En acımasız yöntemimiz! Yapay zeka yargıcımız fotoğrafınızı analiz eder ve sizi hiç acımadan eleştirir. Uyarı: Kalp kırıcı olabilir, ego dostu değildir ve hayat tercihlerinizi sorgulamanıza neden olabilir!",
     },
     purpose: {
       title: "Asıl Amaç 🎪",
