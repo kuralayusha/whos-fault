@@ -43,20 +43,63 @@ export default function SnapRoast() {
     setResult(null);
 
     try {
-      // Dosya boyutu kontrolü
-      //   if (image.size > 4 * 1024 * 1024) {
-      //     // 4MB
-      //     throw new Error("Fotoğraf boyutu çok büyük (max 4MB)");
-      //   }
+      // Görüntüyü sıkıştırma
+      const compressImage = async (file: File): Promise<File> => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = URL.createObjectURL(file);
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d")!;
 
+            const maxWidth = 800;
+            const maxHeight = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxWidth) {
+                height *= maxWidth / width;
+                width = maxWidth;
+              }
+            } else {
+              if (height > maxHeight) {
+                width *= maxHeight / height;
+                height = maxHeight;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            canvas.toBlob(
+              (blob) => {
+                if (!blob) {
+                  reject(new Error("Blob creation failed"));
+                  return;
+                }
+                resolve(new File([blob], file.name, { type: "image/jpeg" }));
+              },
+              "image/jpeg",
+              0.7
+            );
+          };
+          img.onerror = reject;
+        });
+      };
+
+      const compressedImage = await compressImage(image);
+
+      // Orijinal görüntüyü Supabase'e yükle
       const uploadFormData = new FormData();
       uploadFormData.append("file", image);
       uploadFormData.append("userName", userName);
-
       const imageUrl = await uploadImageAction(uploadFormData);
 
+      // Sıkıştırılmış görüntüyü OpenAI'ye gönder
       const formData = new FormData();
-      formData.append("image", image);
+      formData.append("image", compressedImage);
       formData.append("userName", userName);
       formData.append("language", language);
 
