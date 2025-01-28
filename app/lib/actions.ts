@@ -160,7 +160,6 @@ Analyze these stories and tell us who's more at fault with your signature wit!`,
   },
   tr: {
     systemPrompt: `Sen acımasız ve alaycı bir AI yargıcısın. Görevin, kişilerin fotoğraflarını analiz edip onları nazikçe(!) eleştirmek. Sadece fotoğraftaki görünüşe ve eyleme odaklan, kişisel veya hassas konulara girme. Yanıtın şu özelliklerde olmalı:
-
 1. Sadece 2 cümle kullan
 2. İlk cümle görünüş veya pozu aşağlasın hatta uygun yerlerde 'hahaha' gibi efektlerle aşağlayıcılığı arşa çıkarabilirsin
 3. İkinci cümle fotoğraftan soyut bir mana çıkarıp onu rencide edicek sözlerle kuşatsın
@@ -622,30 +621,31 @@ Tu respuesta debe seguir estas reglas:
 };
 
 export async function analyzeImageAction(formData: FormData) {
-  const language = (formData.get("language") as Language) || "en";
-  console.log("Requested language:", language);
-
   try {
     const image = formData.get("image") as File;
     const userName = formData.get("userName") as string;
+    const language = (formData.get("language") as Language) || "en";
 
-    console.log("Image size:", image.size, "bytes");
-    if (image.size > 4 * 1024 * 1024) {
-      // 4MB limit
-      throw new Error("Image too large");
+    // Dosya formatı kontrolü
+    const validFormats = ["image/jpeg", "image/png", "image/webp"];
+    if (!validFormats.includes(image.type)) {
+      throw new Error("INVALID_FORMAT");
     }
 
-    // Görsel içeriğini base64'e çevir
-    const buffer = Buffer.from(await image.arrayBuffer());
-    const base64Image = buffer.toString("base64");
-    console.log("Base64 image size:", base64Image.length, "chars");
-
-    console.log("Using template for language:", language);
-    const template = visionPromptTemplates[language];
-
+    // Base64 dönüşümü öncesi kontrol
     try {
+      const buffer = Buffer.from(await image.arrayBuffer());
+      const base64Image = buffer.toString("base64");
+
+      // Base64 boyut kontrolü
+      if (base64Image.length > 20 * 1024 * 1024) {
+        throw new Error("IMAGE_TOO_LARGE");
+      }
+
+      const template = visionPromptTemplates[language];
       const response = await openai.chat.completions.create({
         model: "gpt-4o-2024-08-06",
+        // model: "gpt-4o-2024-11-20",
         messages: [
           {
             role: "system",
@@ -673,53 +673,84 @@ export async function analyzeImageAction(formData: FormData) {
       console.log("OpenAI response:", response);
       const roastText = response.choices[0].message.content;
       if (!roastText) {
-        throw new Error("No response from OpenAI");
+        throw new Error("OPENAI_NO_RESPONSE");
       }
 
       return { text: roastText };
-    } catch (openaiError) {
-      console.error("OpenAI API Error:", openaiError);
-      throw openaiError;
+    } catch (conversionError) {
+      console.error("Image conversion error:", conversionError);
+      throw new Error("IMAGE_CONVERSION_ERROR");
     }
   } catch (error) {
     console.error("Error in analyzeImageAction:", error);
 
-    if (error instanceof Error) {
-      if (error.message === "Image too large") {
-        return {
-          text:
-            language === "tr"
-              ? "Fotoğraf boyutu çok büyük (max 5MB), lütfen daha küçük bir fotoğraf seçin 📸"
-              : "Image size too large (max 5MB), please select a smaller photo 📸",
-        };
-      }
-    }
+    const errorMessages = {
+      INVALID_FORMAT: {
+        tr: "Lütfen JPEG, PNG veya WEBP formatında bir fotoğraf yükleyin 📸",
+        en: "Please upload a photo in JPEG, PNG or WEBP format 📸",
+        de: "Bitte laden Sie ein Foto im JPEG-, PNG- oder WEBP-Format hoch 📸",
+        fr: "Veuillez télécharger une photo au format JPEG, PNG ou WEBP 📸",
+        es: "Por favor, sube una foto en formato JPEG, PNG o WEBP 📸",
+        zh: "请上传JPEG、PNG或WEBP格式的照片 📸",
+        ko: "JPEG, PNG 또는 WEBP 형식의 사진을 업로드하세요 📸",
+        ja: "JPEG、PNG、またはWEBP形式の写真をアップロードしてください 📸",
+        ar: "يرجى تحميل صورة بتنسيق JPEG أو PNG أو WEBP 📸",
+        ru: "Пожалуйста, загрузите фото в формате JPEG, PNG или WEBP 📸",
+      },
+      IMAGE_TOO_LARGE: {
+        tr: "Fotoğraf boyutu çok büyük, lütfen daha küçük bir fotoğraf seçin 📸",
+        en: "Image size too large, please select a smaller photo 📸",
+        de: "Bildgröße zu groß, bitte wählen Sie ein kleineres Foto 📸",
+        fr: "Taille d'image trop grande, veuillez sélectionner une photo plus petite 📸",
+        es: "Tamaño de imagen demasiado grande, seleccione una foto más pequeña 📸",
+        zh: "图片太大，请选择较小的照片 📸",
+        ko: "이미지 크기가 너무 큽니다. 더 작은 사진을 선택하세요 📸",
+        ja: "画像サイズが大きすぎます。より小さな写真を選択してください 📸",
+        ar: "حجم الصورة كبير جداً، يرجى اختيار صورة أصغر 📸",
+        ru: "Размер изображения слишком большой, выберите фото поменьше 📸",
+      },
+      IMAGE_CONVERSION_ERROR: {
+        tr: "Fotoğraf işlenirken bir hata oluştu, lütfen başka bir fotoğraf deneyin 📸",
+        en: "Error processing the image, please try another photo 📸",
+        de: "Fehler bei der Bildverarbeitung, bitte versuchen Sie ein anderes Foto 📸",
+        fr: "Erreur lors du traitement de l'image, veuillez essayer une autre photo 📸",
+        es: "Error al procesar la imagen, prueba con otra foto 📸",
+        zh: "图片处理错误，请尝试其他照片 📸",
+        ko: "이미지 처리 중 오류가 발생했습니다. 다른 사진을 시도하세요 📸",
+        ja: "画像の処理中にエラーが発生しました。別の写真をお試しください 📸",
+        ar: "خطأ في معالجة الصورة، يرجى تجربة صورة أخرى 📸",
+        ru: "Ошибка обработки изображения, попробуйте другое фото 📸",
+      },
+      UNKNOWN_ERROR: {
+        tr: "Beklenmeyen bir hata oluştu, lütfen tekrar deneyin 😅",
+        en: "An unexpected error occurred, please try again 😅",
+        de: "Ein unerwarteter Fehler ist aufgetreten, bitte versuchen Sie es erneut 😅",
+        fr: "Une erreur inattendue est survenue, veuillez réessayer 😅",
+        es: "Se ha producido un error inesperado, por favor, inténtelo de nuevo 😅",
+        zh: "出现意外错误，请重试 😅",
+        ko: "예기치 않은 오류가 발생했습니다. 다시 시도해주세요 😅",
+        ja: "予期しないエラーが発生しました。もう一度お試しください 😅",
+        ar: "حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى 😅",
+        ru: "Произошла непредвиденная ошибка, пожалуйста, попробуйте еще раз 😅",
+      },
+    } as const;
 
-    const errorMessage = (() => {
-      switch (language) {
-        case "tr":
-          return "Fotoğraf o kadar kötü ki, analiz ederken bir sorun oluştu 😅";
-        case "de":
-          return "Das Foto war so schlecht, dass bei der Analyse ein Fehler aufgetreten ist 😅";
-        case "fr":
-          return "La photo était si mauvaise qu'une erreur s'est produite lors de l'analyse 😅";
-        case "es":
-          return "La foto era tan mala que ocurrió un error durante el análisis 😅";
-        case "zh":
-          return "照片太糟糕了，分析时出现错误 😅";
-        case "ko":
-          return "사진이 너무 형편없어서 분석 중에 오류가 발생했습니다 😅";
-        case "ja":
-          return "写真があまりにもひどくて、分析中にエラーが発生しました 😅";
-        case "ar":
-          return "الصورة كانت سيئة لدرجة أنه حدث خطأ أثناء التحليل 😅";
-        case "ru":
-          return "Фото было настолько плохим, что при анализе произошла ошибка 😅";
-        default:
-          return "The photo was so bad that an error occurred while analyzing it 😅";
-      }
-    })();
+    type ErrorCode = keyof typeof errorMessages;
 
-    return { text: errorMessage };
+    const errorCode = (
+      error instanceof Error ? error.message : "UNKNOWN_ERROR"
+    ) as ErrorCode;
+
+    const language = (formData.get("language") as Language) || "en";
+
+    return {
+      text:
+        errorMessages[errorCode][
+          language as keyof (typeof errorMessages)[typeof errorCode]
+        ] ||
+        errorMessages["UNKNOWN_ERROR"][
+          language as keyof (typeof errorMessages)["UNKNOWN_ERROR"]
+        ],
+    };
   }
 }

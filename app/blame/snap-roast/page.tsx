@@ -43,6 +43,12 @@ export default function SnapRoast() {
     setResult(null);
 
     try {
+      // Dosya boyutu kontrolü
+      if (image.size > 4 * 1024 * 1024) {
+        // 4MB
+        throw new Error("Fotoğraf boyutu çok büyük (max 4MB)");
+      }
+
       const uploadFormData = new FormData();
       uploadFormData.append("file", image);
       uploadFormData.append("userName", userName);
@@ -65,7 +71,9 @@ export default function SnapRoast() {
       });
     } catch (error) {
       console.error("Analysis failed:", error);
-      setResult("Bir hata oluştu, lütfen tekrar deneyin: " + error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Beklenmeyen bir hata oluştu";
+      setResult(`${t("snapRoast.errors.analysisFailed")}: ${errorMessage}`);
     } finally {
       setIsAnalyzing(false);
     }
