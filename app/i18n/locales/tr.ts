@@ -115,15 +115,16 @@ export default {
   snapRoast: {
     title: "SnapRoast",
     description:
-      "Fotoğrafınızı yükleyin, AI size özel bir roast hazırlasın (Dikkat: Kalp kırıcı olabilir!)",
+      "Fotoğrafınızı yükleyin, AI fotoğrafınızı analiz edip haşlayacak (Dikkat: Kalp kırıcı olabilir!)",
     form: {
-      userName: "İsminiz",
+      userName: "İsim",
       imageUpload: "Fotoğraf Yükle veya Çek",
-      analyzeButton: "Roast'u Başlat!",
+      analyzeButton: "HAŞLA!",
       analyzing: "AI inceliyor...",
-      goHome: "YENİ ROAST",
       imageError: "Lütfen bir fotoğraf seçin",
       userNameError: "İsminizi girmelisiniz",
+      playAgain: "Tekrar Haşla!",
+      selectImage: "Fotoğraf Seç",
     },
   },
   common: {

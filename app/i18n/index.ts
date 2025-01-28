@@ -10,16 +10,9 @@ import ar from "./locales/ar";
 import ru from "./locales/ru";
 
 export type Language =
-  | "en"
   | "tr"
-  | "de"
-  | "fr"
-  | "es"
-  | "zh"
-  | "ko"
-  | "ja"
-  | "ar"
-  | "ru";
+  | "en"
+  | Partial<"de" | "fr" | "es" | "zh" | "ko" | "ja" | "ar" | "ru">;
 
 export const translations = {
   en,

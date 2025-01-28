@@ -156,4 +156,19 @@ export default {
         "While we present this as a blame game, our real goal is to help people laugh at their conflicts and maybe see them from a different perspective. Sometimes, adding a bit of humor to a tense situation can help everyone relax and find a real solution together.",
     },
   },
+  snapRoast: {
+    title: "SnapRoast",
+    description:
+      "Upload your photo, AI will analyze it and roast you (Warning: Heartbreaking!)",
+    form: {
+      userName: "Your Name",
+      imageUpload: "Upload or Take Photo",
+      analyzeButton: "ROAST!",
+      analyzing: "AI is judging...",
+      imageError: "Please select a photo",
+      userNameError: "Name is required",
+      playAgain: "New Roast!",
+      selectImage: "Select Image",
+    },
+  },
 } as const;

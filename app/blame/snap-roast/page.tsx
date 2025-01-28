@@ -160,10 +160,19 @@ export default function SnapRoast() {
     }
   };
 
+  const resetGame = () => {
+    setUserName("");
+    setImage(null);
+    setImagePreview(null);
+    setIsAnalyzing(false);
+    setResult(null);
+    setHasAnalyzed(false);
+  };
+
   const isValid = userName.trim() !== "" && image !== null;
 
   return (
-    <main className="h-[100dvh] w-full bg-gradient-to-b from-slate-900 to-slate-800 flex flex-col items-center justify-center p-4">
+    <main className="h-[100dvh] flex flex-col items-center justify-center p-4">
       <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
         <LanguageSelector />
         <Link
@@ -190,7 +199,9 @@ export default function SnapRoast() {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder={t("snapRoast.form.userName") as string}
-            className="w-full p-2 bg-slate-700 text-white rounded-lg text-sm placeholder-slate-400"
+            disabled={isAnalyzing || hasAnalyzed}
+            className="w-full p-2 bg-slate-700 text-white rounded-lg text-base placeholder-slate-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ fontSize: "16px" }}
           />
 
           <div className="space-y-2">
@@ -201,12 +212,14 @@ export default function SnapRoast() {
               accept="image/*"
               className="hidden"
             />
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full p-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm transition-colors"
-            >
-              {t("snapRoast.form.selectImage") as string}
-            </button>
+            {!isAnalyzing && !hasAnalyzed && (
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full p-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm transition-colors"
+              >
+                {t("snapRoast.form.selectImage") as string}
+              </button>
+            )}
 
             {imagePreview && !result && (
               <div className="relative w-32 h-32 mx-auto rounded-lg overflow-hidden">
@@ -220,12 +233,12 @@ export default function SnapRoast() {
           </div>
 
           {hasAnalyzed ? (
-            <Link
-              href="/start"
+            <button
+              onClick={resetGame}
               className="block w-full p-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-center transition-colors text-sm"
             >
-              {t("snapRoast.form.goHome") as string}
-            </Link>
+              {t("snapRoast.form.playAgain") as string}
+            </button>
           ) : (
             <button
               onClick={analyze}
