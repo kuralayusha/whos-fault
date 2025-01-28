@@ -7,14 +7,14 @@ import type { Language } from "@/app/i18n";
 const languages = [
   { code: "en" as Language, name: "English", flag: "🇺🇸" },
   { code: "tr" as Language, name: "Türkçe", flag: "🇹🇷" },
-  { code: "de" as Language, name: "Deutsch", flag: "🇩🇪" },
-  { code: "fr" as Language, name: "Français", flag: "🇫🇷" },
-  { code: "es" as Language, name: "Español", flag: "🇪🇸" },
-  { code: "zh" as Language, name: "中文", flag: "🇨🇳" },
-  { code: "ko" as Language, name: "한국어", flag: "🇰🇷" },
-  { code: "ja" as Language, name: "日本語", flag: "🇯🇵" },
-  { code: "ar" as Language, name: "العربية", flag: "🇸🇦" },
-  { code: "ru" as Language, name: "Русский", flag: "🇷🇺" },
+  //   { code: "de" as Language, name: "Deutsch", flag: "🇩🇪" },
+  //   { code: "fr" as Language, name: "Français", flag: "🇫🇷" },
+  //   { code: "es" as Language, name: "Español", flag: "🇪🇸" },
+  //   { code: "zh" as Language, name: "中文", flag: "🇨🇳" },
+  //   { code: "ko" as Language, name: "한국어", flag: "🇰🇷" },
+  //   { code: "ja" as Language, name: "日本語", flag: "🇯🇵" },
+  //   { code: "ar" as Language, name: "العربية", flag: "🇸🇦" },
+  //   { code: "ru" as Language, name: "Русский", flag: "🇷🇺" },
 ];
 
 export function LanguageSelector() {

@@ -10,6 +10,56 @@ import {
   uploadImageAction,
 } from "@/app/lib/actions";
 
+const compressImage = async (file: File): Promise<File> => {
+  console.log("🔄 Compression Started:", {
+    originalSize: `${(file.size / 1024 / 1024).toFixed(2)}MB`,
+    type: file.type,
+  });
+
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d")!;
+
+      const maxWidth = 600;
+      const maxHeight = 600;
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+      } else {
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Blob creation failed"));
+            return;
+          }
+          resolve(new File([blob], file.name, { type: "image/jpeg" }));
+        },
+        "image/jpeg",
+        0.5
+      );
+    };
+    img.onerror = reject;
+  });
+};
+
 export default function SnapRoast() {
   const { t, language } = useLanguage();
   const [userName, setUserName] = useState("");
@@ -20,19 +70,33 @@ export default function SnapRoast() {
   const [hasAnalyzed, setHasAnalyzed] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      console.log("file: ", file);
+    if (!file) return;
 
-      setImage(file);
+    console.log("�� File Selected:", {
+      name: file.name,
+      type: file.type,
+      size: `${(file.size / 1024 / 1024).toFixed(2)}MB`,
+    });
+
+    try {
+      const compressedImage = await compressImage(file);
+      setImage(compressedImage);
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log(reader.result);
-
         setImagePreview(reader.result as string);
+        console.log("🖼️ Preview Set");
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(compressedImage);
+    } catch (error) {
+      console.error("❌ Image Processing Error:", error);
+      setResult(
+        error instanceof Error ? error.message : "Image processing failed"
+      );
+      setImage(null);
+      setImagePreview(null);
     }
   };
 
@@ -49,51 +113,6 @@ export default function SnapRoast() {
         type: image.type,
         size: `${(image.size / 1024 / 1024).toFixed(2)}MB`,
       });
-
-      const compressImage = async (file: File): Promise<File> => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = URL.createObjectURL(file);
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d")!;
-
-            const maxWidth = 600;
-            const maxHeight = 600;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-              if (width > maxWidth) {
-                height *= maxWidth / width;
-                width = maxWidth;
-              }
-            } else {
-              if (height > maxHeight) {
-                width *= maxHeight / height;
-                height = maxHeight;
-              }
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
-
-            canvas.toBlob(
-              (blob) => {
-                if (!blob) {
-                  reject(new Error("Blob creation failed"));
-                  return;
-                }
-                resolve(new File([blob], file.name, { type: "image/jpeg" }));
-              },
-              "image/jpeg",
-              0.5
-            );
-          };
-          img.onerror = reject;
-        });
-      };
 
       const compressedImage = await compressImage(image);
       console.log("Compressed file:", {
