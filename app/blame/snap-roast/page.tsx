@@ -65,7 +65,7 @@ export default function SnapRoast() {
       });
     } catch (error) {
       console.error("Analysis failed:", error);
-      setResult("Bir hata oluştu, lütfen tekrar deneyin.");
+      setResult("Bir hata oluştu, lütfen tekrar deneyin: " + error);
     } finally {
       setIsAnalyzing(false);
     }
