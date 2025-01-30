@@ -108,20 +108,16 @@ export default function Start() {
         </div>
 
         <div className="grid gap-3 sm:gap-4">
+          {/* Snap Roast */}
           <OptionButton
-            href="/blame/fifty-fifty"
-            title={t("start.options.fiftyFifty.title") as string}
-            description={t("start.options.fiftyFifty.description") as string}
-            blameCount={fiftyFiftyCount}
+            href="/blame/snap-roast"
+            title={t("start.options.snapRoast.title") as string}
+            description={t("start.options.snapRoast.description") as string}
+            blameCount={snapRoastCount}
             t={t}
           />
-          <OptionButton
-            href="/blame/number-guess"
-            title={t("start.options.numberGuess.title") as string}
-            description={t("start.options.numberGuess.description") as string}
-            blameCount={numberGuessCount}
-            t={t}
-          />
+
+          {/* AI Analysis */}
           <OptionButton
             href="/blame/ai-analysis"
             title={t("start.options.aiAnalysis.title") as string}
@@ -129,11 +125,22 @@ export default function Start() {
             blameCount={aiAnalysisCount}
             t={t}
           />
+
+          {/* Fifty Fifty */}
           <OptionButton
-            href="/blame/snap-roast"
-            title={t("start.options.snapRoast.title") as string}
-            description={t("start.options.snapRoast.description") as string}
-            blameCount={snapRoastCount}
+            href="/blame/fifty-fifty"
+            title={t("start.options.fiftyFifty.title") as string}
+            description={t("start.options.fiftyFifty.description") as string}
+            blameCount={fiftyFiftyCount}
+            t={t}
+          />
+
+          {/* Number Guess */}
+          <OptionButton
+            href="/blame/number-guess"
+            title={t("start.options.numberGuess.title") as string}
+            description={t("start.options.numberGuess.description") as string}
+            blameCount={numberGuessCount}
             t={t}
           />
         </div>
