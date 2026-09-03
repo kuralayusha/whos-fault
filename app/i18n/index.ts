@@ -26,5 +26,3 @@ export const translations = {
   ar,
   ru,
 };
-
-export type TranslationKey = keyof typeof en;

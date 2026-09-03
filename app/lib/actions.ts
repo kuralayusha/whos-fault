@@ -438,7 +438,6 @@ export async function analyzeImageAction(formData: FormData) {
         max_tokens: 150,
       });
 
-      console.log("OpenAI response:", response);
       const roastText = response.choices[0].message.content;
       if (!roastText) {
         throw new Error("OPENAI_NO_RESPONSE");
